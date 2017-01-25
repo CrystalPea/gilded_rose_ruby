@@ -25,7 +25,7 @@ describe GildedRose do
       it "quality never negative" do
         items = [Item.new("foo", 0, 0)]
         GildedRose.new(items).update_quality
-        expect(items[0].quality).to eq 0
+        expect(items[0].quality).to eq GildedRose::MIN_QUALITY
       end
 
       it "sell-in decreases by one" do
@@ -57,7 +57,7 @@ describe GildedRose do
       it "has maximum quality of 50" do
         items = [Item.new("Aged Brie", 2, 50)]
         GildedRose.new(items).update_quality
-        expect(items[0].quality).to eq 50
+        expect(items[0].quality).to eq GildedRose::MAX_QUALITY
       end
     end
 
@@ -93,10 +93,16 @@ describe GildedRose do
         expect(items[0].quality).to eq 0
       end
 
+      it "has maximum quality of 50" do
+        items = [Item.new("Backstage passes to a TAFKAL80ETC concert", 2, 50)]
+        GildedRose.new(items).update_quality
+        expect(items[0].quality).to eq GildedRose::MAX_QUALITY
+      end
+
       it "quality never negative" do
         items = [Item.new("Backstage passes to a TAFKAL80ETC concert", 0, 0)]
         GildedRose.new(items).update_quality
-        expect(items[0].quality).to eq 0
+        expect(items[0].quality).to eq GildedRose::MIN_QUALITY
       end
     end
 
@@ -130,7 +136,7 @@ describe GildedRose do
       it "quality never negative" do
         items = [Item.new("Conjured", 1, 0)]
         GildedRose.new(items).update_quality
-        expect(items[0].quality).to eq 0
+        expect(items[0].quality).to eq GildedRose::MIN_QUALITY
       end
     end
   end

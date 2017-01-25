@@ -21,6 +21,10 @@ class GildedRose
           else item.quality = 0
           end
         when "Sulfuras, Hand of Ragnaros"; nil
+        when "Conjured"
+          if item.sell_in > 0
+            item.quality -= 2
+          end
         else
           if item.sell_in > 0
             item.quality -= 1 unless item.quality == 0

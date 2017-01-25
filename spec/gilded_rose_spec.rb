@@ -114,11 +114,13 @@ describe GildedRose do
       end
     end
 
-    # context "Conjured items" do
-    #   it "quality decreases by 2 if before sell_in date" do
-    #
-    #   end
-    # end
+    context "Conjured items" do
+      it "quality decreases by 2 if before sell_in date" do
+          items = [Item.new("Conjured", 2, 2)]
+          GildedRose.new(items).update_quality()
+          expect(items[0].quality).to eq 0
+      end
+    end
   end
 
 end

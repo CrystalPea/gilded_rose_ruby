@@ -69,7 +69,7 @@ describe GildedRose do
         expect(items[0].sell_in).to eq 11
       end
 
-      it "quality increases by 1 if 10 days to the concert" do
+      it "quality increases by 1 if more than 10 days to the concert" do
         items = [Item.new("Backstage passes to a TAFKAL80ETC concert", 12, 2)]
         GildedRose.new(items).update_quality
         expect(items[0].quality).to eq 3
@@ -116,7 +116,7 @@ describe GildedRose do
 
     # context "Conjured items" do
     #   it "quality decreases by 2 if before sell_in date" do
-    # 
+    #
     #   end
     # end
   end

@@ -120,6 +120,12 @@ describe GildedRose do
           GildedRose.new(items).update_quality()
           expect(items[0].quality).to eq 0
       end
+
+      it "quality never negative" do
+        items = [Item.new("Conjured", 1, 0)]
+        GildedRose.new(items).update_quality
+        expect(items[0].quality).to eq 0
+      end
     end
   end
 

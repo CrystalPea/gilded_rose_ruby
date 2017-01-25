@@ -27,6 +27,11 @@ class GildedRose
               item.quality -= 2
             else item.quality = 0
             end
+          else
+            if item.quality > 3
+              item.quality -= 4
+            else item.quality = 0
+            end
           end
         else
           if item.sell_in > 0

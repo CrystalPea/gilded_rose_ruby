@@ -23,28 +23,30 @@ class GildedRose
         when "Sulfuras, Hand of Ragnaros"; nil
         when "Conjured"
           if item.sell_in > 0
-            if item.quality > 1
-              item.quality -= 2
-            else item.quality = 0
-            end
-          else
-            if item.quality > 3
-              item.quality -= 4
-            else item.quality = 0
-            end
+            item.quality -= 2
+          else item.quality -= 4
           end
         else
           if item.sell_in > 0
-            item.quality -= 1 unless item.quality == 0
-          elsif item.quality >= 2
+            item.quality -= 1
+          else
             item.quality -= 2
-          else item.quality = 0
           end
-      end
+        end
+
+      ensure_quelity_is_not_negative(item)
 
       if item.name != "Sulfuras, Hand of Ragnaros"
         item.sell_in = item.sell_in - 1
       end
+    end
+  end
+
+  private
+
+  def ensure_quelity_is_not_negative(item)
+    if item.quality < 0
+      item.quality = 0
     end
   end
 end

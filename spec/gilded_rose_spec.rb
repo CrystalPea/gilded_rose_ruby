@@ -113,6 +113,12 @@ describe GildedRose do
         expect(items[0].sell_in).to eq 2
       end
     end
+
+    # context "Conjured items" do
+    #   it "quality decreases by 2 if before sell_in date" do
+    # 
+    #   end
+    # end
   end
 
 end

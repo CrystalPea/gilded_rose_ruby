@@ -12,14 +12,12 @@ describe GildedRose do
 
       it "quality decreases by one" do
         items = [Item.new("foo", 2, 2)]
-        GildedRose.new(items).update_quality()
-        expect(items[0].quality).to eq 1
+        expect {GildedRose.new(items).update_quality}.to change {items[0].quality}.by(-GildedRose::REGULAR_DEGRADATION)
       end
 
-      it "quality decreases by two after sell_in date" do
+      it "quality decreases twice as fast after sell_in date" do
         items = [Item.new("foo", 0, 2)]
-        GildedRose.new(items).update_quality()
-        expect(items[0].quality).to eq 0
+        expect {GildedRose.new(items).update_quality}.to change {items[0].quality}.by(-GildedRose::REGULAR_DEGRADATION * 2)
       end
 
       it "quality never negative" do
@@ -30,7 +28,7 @@ describe GildedRose do
 
       it "sell-in decreases by one" do
         items = [Item.new("foo", 2, 2)]
-        GildedRose.new(items).update_quality()
+        GildedRose.new(items).update_quality
         expect(items[0].sell_in).to eq 1
       end
     end
@@ -121,16 +119,14 @@ describe GildedRose do
     end
 
     context "Conjured items" do
-      it "quality decreases by 2 if before sell_in date" do
+      it "quality decreases twice as fast as regular items before sell_in date" do
           items = [Item.new("Conjured", 2, 2)]
-          GildedRose.new(items).update_quality()
-          expect(items[0].quality).to eq 0
+        expect {GildedRose.new(items).update_quality}.to change {items[0].quality}.by(-GildedRose::REGULAR_DEGRADATION*2)
       end
 
-      it "quality decreases by 4 if after sell_in date" do
+      it "quality decreases twice as fast as regular items after sell_in date" do
           items = [Item.new("Conjured", 0, 5)]
-          GildedRose.new(items).update_quality()
-          expect(items[0].quality).to eq 1
+          expect {GildedRose.new(items).update_quality}.to change {items[0].quality}.by(-GildedRose::REGULAR_DEGRADATION*4)
       end
 
       it "quality never negative" do

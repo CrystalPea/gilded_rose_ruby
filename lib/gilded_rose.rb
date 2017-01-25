@@ -35,10 +35,8 @@ class GildedRose
         end
 
       ensure_quality_is_not_negative(item)
+      reduce_sell_in(item)
 
-      if item.name != "Sulfuras, Hand of Ragnaros"
-        item.sell_in = item.sell_in - 1
-      end
     end
   end
 
@@ -46,5 +44,9 @@ class GildedRose
 
   def ensure_quality_is_not_negative(item)
     item.quality = 0  if item.quality < 0
+  end
+
+  def reduce_sell_in(item)
+    item.sell_in = item.sell_in - 1 unless item.name == "Sulfuras, Hand of Ragnaros"
   end
 end

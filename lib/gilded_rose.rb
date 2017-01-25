@@ -18,13 +18,19 @@ class GildedRose
              item.quality += 3
           else item.quality = 0
           end
+        when "Sulfuras, Hand of Ragnaros"; nil
+        else
+          if item.sell_in > 0
+            item.quality -= 1 unless item.quality == 0
+          elsif item.quality >= 2
+            item.quality -= 2
+          else
+            item.quality = 0
+          end
       end
 
       if item.name != "Aged Brie" and item.name != "Backstage passes to a TAFKAL80ETC concert"
         if item.quality > 0
-          if item.name != "Sulfuras, Hand of Ragnaros"
-            item.quality = item.quality - 1
-          end
         end
       end
       if item.name != "Sulfuras, Hand of Ragnaros"
@@ -34,12 +40,7 @@ class GildedRose
         if item.name != "Aged Brie"
           if item.name != "Backstage passes to a TAFKAL80ETC concert"
             if item.quality > 0
-              if item.name != "Sulfuras, Hand of Ragnaros"
-                item.quality = item.quality - 1
-              end
             end
-          else
-            item.quality = item.quality - item.quality
           end
         end
       end
